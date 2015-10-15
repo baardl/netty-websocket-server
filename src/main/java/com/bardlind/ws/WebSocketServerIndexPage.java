@@ -13,7 +13,7 @@ public final class WebSocketServerIndexPage {
 
         public static ByteBuf getContent(String webSocketLocation) {
                 return Unpooled.copiedBuffer(
-                        "<html><head><title>Feeder</title></head>" + NEWLINE +
+                        "<html><head><title>netty-websocket-server</title></head>" + NEWLINE +
                                 "<body>" + NEWLINE +
                                 "<script type=\"text/javascript\">" + NEWLINE +
                                 "var socket;" + NEWLINE +
@@ -51,7 +51,7 @@ public final class WebSocketServerIndexPage {
                                 "<input type=\"text\" name=\"message\" value=\"Hello, World!\"/>" +
                                 "<input type=\"button\" value=\"Send Web Socket Data\"" + NEWLINE +
                                 "       onclick=\"send(this.form.message.value)\" />" + NEWLINE +
-                                "<h3>Output from Feeder</h3>" + NEWLINE +
+                                "<h3>Output from netty-websocket-server</h3>" + NEWLINE +
                                 "<textarea id=\"responseText\" style=\"width:500px;height:300px;\"></textarea>" + NEWLINE +
                                 "</form>" + NEWLINE +
                                 "</body>" + NEWLINE +

@@ -1,6 +1,7 @@
-package com.bardlind.ws;
+package com.bardlind.ws.outbound;
 
 
+import com.bardlind.ws.ChannelRepository;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -18,7 +19,7 @@ import java.security.cert.CertificateException;
 /**
  */
 @Component
-public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel> {
+public class OutboundWebSocketServerInitializer extends ChannelInitializer<SocketChannel> {
 
 
     private final SslContext sslCtx;
@@ -26,7 +27,7 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
     private final ChannelRepository channelRepository;
 
     @Autowired
-    public WebSocketServerInitializer(ChannelRepository channelRepository) throws CertificateException, SSLException {
+    public OutboundWebSocketServerInitializer(ChannelRepository channelRepository) throws CertificateException, SSLException {
         this.channelRepository = channelRepository;
         if (SSL) {
             SelfSignedCertificate ssc = new SelfSignedCertificate();
@@ -44,7 +45,6 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
         }
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(65536));
-        pipeline.addLast(new InboundServerHandler(channelRepository));
         pipeline.addLast(new OutboundServerHandler(channelRepository));
     }
 }

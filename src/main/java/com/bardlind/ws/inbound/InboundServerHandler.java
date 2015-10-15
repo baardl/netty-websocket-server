@@ -1,5 +1,7 @@
-package com.bardlind.ws;
+package com.bardlind.ws.inbound;
 
+import com.bardlind.ws.ChannelRepository;
+import com.bardlind.ws.WebSocketServerIndexPage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;

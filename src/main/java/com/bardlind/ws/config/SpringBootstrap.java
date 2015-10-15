@@ -1,6 +1,7 @@
 package com.bardlind.ws.config;
 
-import com.bardlind.ws.WebSocketServerInitializer;
+import com.bardlind.ws.inbound.WebSocketServerInitializer;
+import com.bardlind.ws.outbound.OutboundWebSocketServerInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -22,10 +23,12 @@ import java.util.Set;
 public class SpringBootstrap {
 
     private final WebSocketServerInitializer protocolInitalizer;
+    private final OutboundWebSocketServerInitializer outboundWebSocketServerInitializer;
 
     @Autowired
-    public SpringBootstrap(WebSocketServerInitializer protocolInitalizer) {
+    public SpringBootstrap(WebSocketServerInitializer protocolInitalizer, OutboundWebSocketServerInitializer outboundWebSocketServerInitializer) {
         this.protocolInitalizer = protocolInitalizer;
+        this.outboundWebSocketServerInitializer = outboundWebSocketServerInitializer;
     }
 
     public io.netty.bootstrap.ServerBootstrap bootstrap() {
@@ -33,6 +36,20 @@ public class SpringBootstrap {
         b.group(bossGroup(), workerGroup())
                 .channel(NioServerSocketChannel.class)
                 .childHandler(protocolInitalizer);
+        Map<ChannelOption<?>, Object> tcpChannelOptions = tcpChannelOptions();
+        Set<ChannelOption<?>> keySet = tcpChannelOptions.keySet();
+        for (@SuppressWarnings("rawtypes")
+        ChannelOption option : keySet) {
+            b.option(option, tcpChannelOptions.get(option));
+        }
+        return b;
+    }
+
+    public io.netty.bootstrap.ServerBootstrap outputBootstrap() {
+        io.netty.bootstrap.ServerBootstrap b = new io.netty.bootstrap.ServerBootstrap();
+        b.group(bossGroup(), workerGroup())
+                .channel(NioServerSocketChannel.class)
+                .childHandler(outboundWebSocketServerInitializer);
         Map<ChannelOption<?>, Object> tcpChannelOptions = tcpChannelOptions();
         Set<ChannelOption<?>> keySet = tcpChannelOptions.keySet();
         for (@SuppressWarnings("rawtypes")

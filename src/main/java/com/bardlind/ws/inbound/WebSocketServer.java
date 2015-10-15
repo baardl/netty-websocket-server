@@ -1,4 +1,4 @@
-package com.bardlind.ws;
+package com.bardlind.ws.inbound;
 
 
 import com.bardlind.ws.config.SpringBootstrap;

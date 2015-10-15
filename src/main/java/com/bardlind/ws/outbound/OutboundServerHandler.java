@@ -1,5 +1,7 @@
-package com.bardlind.ws;
+package com.bardlind.ws.outbound;
 
+import com.bardlind.ws.ChannelRepository;
+import com.bardlind.ws.WebSocketServerIndexPage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -63,7 +65,7 @@ public class OutboundServerHandler extends SimpleChannelInboundHandler<Object> {
         }
 
         // Send the demo page and favicon.ico
-        if ("/output".equals(req.getUri())) {
+        if ("/".equals(req.getUri())) {
             ByteBuf content = WebSocketServerIndexPage.getContent(getWebSocketLocation(req));
             FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
 
@@ -156,7 +158,7 @@ public class OutboundServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private static String getWebSocketLocation(FullHttpRequest req) {
         String location = req.headers().get(HOST) + WEBSOCKET_PATH;
-        if (WebSocketServer.SSL) {
+        if (OutboundWebSocketServer.SSL) {
             return "wss://" + location;
         } else {
             return "ws://" + location;
