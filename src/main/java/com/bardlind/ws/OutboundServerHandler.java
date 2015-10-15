@@ -63,7 +63,7 @@ public class OutboundServerHandler extends SimpleChannelInboundHandler<Object> {
         }
 
         // Send the demo page and favicon.ico
-        if ("/".equals(req.getUri())) {
+        if ("/output".equals(req.getUri())) {
             ByteBuf content = WebSocketServerIndexPage.getContent(getWebSocketLocation(req));
             FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
 

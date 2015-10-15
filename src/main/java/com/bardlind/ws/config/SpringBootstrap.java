@@ -71,7 +71,7 @@ public class SpringBootstrap {
     @Value("${worker.thread.count}")
     private int workerCount;
 
-    @Value("${tcp.port}")
+    @Value("${http.port}")
     private int tcpPort;
 
     @Value("${ssl}")
@@ -83,6 +83,4 @@ public class SpringBootstrap {
     @Value("${so.backlog}")
     private int backlog;
 
-    @Value("${log4j.configuration}")
-    private String log4jConfiguration;
 }

@@ -12,8 +12,8 @@
     <constretto:configuration annotation-config="true" property-placeholder="true">
         <constretto:stores>
             <constretto:properties-store>
-                <constretto:resource location="classpath:domainconfig.properties"/>
-                <constretto:resource location="file:./domainconfig_override.properties"/>
+                <constretto:resource location="classpath:netty-websocket-server.properties"/>
+                <constretto:resource location="file:./netty-websocket-server_override.properties"/>
             </constretto:properties-store>
         </constretto:stores>
     </constretto:configuration>

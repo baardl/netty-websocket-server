@@ -5,7 +5,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.util.CharsetUtil;
 
 /**
- * Generates the demo HTML page which is served at http://localhost:8080/
+ * Generates the demo HTML page which is served at http://localhost:8093/
  */
 public final class WebSocketServerIndexPage {
 
